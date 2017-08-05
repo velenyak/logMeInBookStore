@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { NgxPaginationModule } from "ngx-pagination";
+
 import { AppRoutingModule } from "./app.router";
 
 import { AppComponent } from './app.component';
@@ -19,7 +21,8 @@ import { MainComponent } from './main/main.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

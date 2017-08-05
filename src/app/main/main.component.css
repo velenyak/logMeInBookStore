@@ -1,0 +1,18 @@
+.page-item:hover {
+    cursor: pointer !important;
+}
+
+.book-title {
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+.book-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-height: 1em;
+    max-height: 3em;
+}

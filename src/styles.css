@@ -10,11 +10,15 @@ footer {
     margin-top: 5vh;
 }
 
+.top-buffer-lg {
+    margin-top: 8vh;
+}
+
 .clickable:hover {
     cursor: pointer;
 }
 
 .clickable:focus {
-  outline: none;
-  border: 0px;
+    outline: none;
+    border: 0px;
 }

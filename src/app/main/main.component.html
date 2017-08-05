@@ -1,3 +1,66 @@
-<p>
-  main works!
-</p>
+<div class="container top-buffer-lg">
+  <!-- Search Bar -->
+  <div class="row">
+    <div class="col-sm-offset-3 col-sm-6">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText" (keyup.enter)="searchBooks(searchText, 1)">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" (click)="searchBooks(searchText, 1)"
+              [disabled]="searchText == undifened || searchText.length == 0">
+            <span class="fa fa-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- Loading -->
+  <div class="text-center top-buffer-md" *ngIf="isLoading">
+    <span class="fa fa-spinner fa-pulse fa-5x"></span>
+  </div>
+  <!-- Books -->
+  <div *ngIf="books?.length > 0;">
+    <div class="top-buffer-lg">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let book of books">
+          <div class="container-fluid">
+            <div class="col-sm-8">
+              <a class="book-title">{{book.title}}</a>
+              <p class="book-description">
+                {{book.description}}
+              </p>
+              <p>
+                Authors: {{book.authors}}
+              </p>
+              <p>
+                Publish Date: {{book.publishDate}}
+              </p>
+            </div>
+            <div class="col-sm-3 pull-right">
+              <img class="img-responsive pull-right" [src]="book.imageLinks.smallThumbnail">
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- Pagination -->
+    <div class="top-buffer-md">
+      <ul class="pagination">
+        <li class="page-item">
+          <span class="fa fa-angle-double-left" (click)="switchPage(1)"></span>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': currentPage-1 < 1}">
+          <span class="fa fa-angle-left" (click)="switchPage(currentPage-1)"></span>
+        </li>
+        <li class="page-item" *ngFor="let pageNumber of activePageNumbers" [ngClass]="{'active': pageNumber==currentPage}">
+          <a class="page-link" (click)="switchPage(pageNumber)">{{pageNumber}}</a>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': currentPage+1 > maxPage}">
+          <span class="fa fa-angle-right" (click)="switchPage(currentPage+1)"></span>
+        </li>
+        <li class="page-item">
+          <span class="fa fa-angle-double-right" (click)="switchPage(maxPage)"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
