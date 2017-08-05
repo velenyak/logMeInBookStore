@@ -24,7 +24,7 @@
         <li class="list-group-item" *ngFor="let book of books">
           <div class="container-fluid">
             <div class="col-sm-8">
-              <a class="book-title">{{book.title}}</a>
+              <a class="book-title" [routerLink]="['/book', book.id]">{{book.title}}</a>
               <p class="book-description">
                 {{book.description}}
               </p>

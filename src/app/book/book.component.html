@@ -1,0 +1,18 @@
+<div class="container top-buffer-md">
+  <div class="row">
+    <div class="col-sm-3">
+      <img class="img-responsive" [src]="book.volumeInfo.imageLinks.thumbnail">
+    </div>
+    <div class="col-sm-6">
+      <h3>Title: {{book?.volumeInfo.title}}</h3>
+      <p>Authors: {{authors}}</p>
+      <span>Description: </span>
+      <span [innerHTML]="book?.volumeInfo.description"></span>
+    </div>
+    <div class="col-sm-3 text-center">
+      <p class="text-center label label-danger price">{{price}}</p>
+      <input type="number" class="form-control top-buffer-sm text-center" [(ngModel)]="orderCount">
+      <button class="btn btn-success btn-lg top-buffer-sm">Add to Cart</button>
+    </div>
+  </div>
+</div>

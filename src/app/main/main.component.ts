@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   ngOnInit() {
-    this.activePageNumbers = [1, 2, 3, 4, 5, 6, 7, 8];
+    this.activePageNumbers = Array.from(Array(8).keys());
     this.isLoading = false;
   }
 
@@ -43,28 +43,16 @@ export class MainComponent implements OnInit {
     let books = [];
     for (let book of booksResponse) {
       let retBook = {
+        id: book.id,
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
-        authors: this.convertAuthors(book.volumeInfo.authors),
+        authors: this.bookService.convertAuthors(book.volumeInfo.authors),
         publishDate: this.convertPublishDate(book.volumeInfo.publishedDate),
         imageLinks: book.volumeInfo.imageLinks || {smallThumbnail: 'https://books.google.hu//googlebooks/images/no_cover_thumb.gif'}
       }
       books.push(retBook);
     }
     return books;
-  }
-
-  private convertAuthors(authorsResponse: string[]) {
-    let ret:string = '';
-    if(authorsResponse != undefined) {
-      for(let i = 0; i < authorsResponse.length - 2; i++) {
-        ret = ret.concat(authorsResponse[i] + ', ');
-      }
-      return ret.concat(authorsResponse[authorsResponse.length - 1]);
-    }
-    else {
-      return 'Unknown';
-    }
   }
 
   private convertPublishDate(date: string) {

@@ -8,12 +8,16 @@ import { AppRoutingModule } from "./app.router";
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
+import { BookComponent } from './book/book.component';
+
+import { BookService } from "./shared/book.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    MainComponent
+    MainComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,7 @@ import { MainComponent } from './main/main.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
