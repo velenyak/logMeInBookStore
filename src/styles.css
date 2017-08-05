@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+footer {
+    min-height: 10vh;
+}
+
+.top-buffer-sm {
+    margin-top: 3vh;
+}
+
+.top-buffer-md {
+    margin-top: 5vh;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+.clickable:focus {
+  outline: none;
+  border: 0px;
+}
