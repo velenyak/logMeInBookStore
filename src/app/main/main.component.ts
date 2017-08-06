@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
         this.isLoading = false;
         this.books = this.convertResponse(response.items);
         this.currentPage = page;
-        this.maxPage = response.items.length > 10 ? Math.ceil(response.totalItems / 10) : 1;
+        this.maxPage = response.items.length >= 10 ? Math.ceil(response.totalItems / 10) : 1;
         this.activePageNumbers = this.getActivePageNumbers(this.maxPage, this.currentPage);
       }
     )
