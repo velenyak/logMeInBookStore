@@ -27,7 +27,7 @@ export class CartComponent implements OnInit {
   public getTotalPrice(item) {
     switch (item.book.saleInfo.saleability) {
       case FOR_SALE:
-        return `Price: ${item.book.saleInfo.retailPrice.amount * item.quantity} ${item.book.saleInfo.retailPrice.currencyCode}`;       
+        return `${item.book.saleInfo.retailPrice.amount * item.quantity} ${item.book.saleInfo.retailPrice.currencyCode}`;       
       default:
         return 'FREE';
     }

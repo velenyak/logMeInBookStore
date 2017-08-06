@@ -1,3 +1,7 @@
 .price {
     font-size: 1.4em;
 }
+
+.success {
+    color: green;
+}

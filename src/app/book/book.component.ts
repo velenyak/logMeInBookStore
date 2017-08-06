@@ -18,11 +18,13 @@ export class BookComponent implements OnInit {
   price: string;
   quantity: number;
   authors: string;
+  showSuccessText: boolean;
 
   constructor(private route: ActivatedRoute, private bookService: BookService, private cartService: CartService) { }
 
   ngOnInit() {
     this.quantity = 1;
+    this.showSuccessText = false;
     this.route.data.subscribe(
       data => {
         this.book = data.book;
@@ -66,6 +68,10 @@ export class BookComponent implements OnInit {
     }
     sessionStorage.setItem('cart', JSON.stringify(cart));
     this.cartService.cartItemChange(cart);
+    this.showSuccessText = true;
+    setTimeout(() => {
+      this.showSuccessText = false;
+    }, 2000)
   }
 
 }

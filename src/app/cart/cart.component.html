@@ -19,7 +19,7 @@
             <input class="form-control text-center" type="number" min="1" max="999" [(ngModel)]="item.quantity">
           </td>
           <td class="cart-item">
-            {{item.book.volumeInfo.title}}
+            <a class="clickable" [routerLink]="['/book', item.book.id]">{{item.book.volumeInfo.title}}</a>
           </td>
           <td class="cart-item">
             {{getTotalPrice(item)}}
