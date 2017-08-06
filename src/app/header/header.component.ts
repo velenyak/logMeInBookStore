@@ -9,25 +9,19 @@ import { CartService } from "../shared/cart.service";
 })
 export class HeaderComponent implements OnInit {
 
-  collapsed: string;
   subscription: any;
   isCartEmpty: boolean
 
   constructor(private cartService: CartService) { }
 
   ngOnInit() {
-    this.collapsed = 'yes';
-    this.isCartEmpty = sessionStorage.getItem('cart') == null;
+    this.isCartEmpty = sessionStorage.getItem('cart') == null || JSON.parse(sessionStorage.getItem('cart')).length == 0;
     this.subscription = this.cartService.cartChange.subscribe(
       cart => {
         console.log(cart);
         this.isCartEmpty = cart.length == 0;
       }
     )
-  }
-
-  public toggle() {
-    this.collapsed = (this.collapsed === 'yes' ? 'no' : 'yes');
   }
 
 }
