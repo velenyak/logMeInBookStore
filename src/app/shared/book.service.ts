@@ -8,8 +8,13 @@ export class BookService {
   constructor(private http:Http) { }
 
   getBooks(query:string, startIndex: number) {
+    /**
+     * According to Google Books API to search in title only the uri should be:
+     * https://www.googleapis.com/books/v1/volumes?q=${query}+intitle&startIndex=${startIndex}
+     * However I found it to be inaccurate, so stayed used it without the intitle parameter
+     */
     return this.http.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${query}+intitle&startIndex=${startIndex}`)
+      `https://www.googleapis.com/books/v1/volumes?q=${query}&startIndex=${startIndex}`)
     .map(res => res.json());
   }
 

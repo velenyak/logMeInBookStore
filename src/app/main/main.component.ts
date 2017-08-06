@@ -9,6 +9,7 @@ import { BookService } from "../shared/book.service";
 })
 export class MainComponent implements OnInit {
 
+  searchText: string;
   query: string;
   books: string[];
   activePageNumbers: number[];
@@ -23,23 +24,22 @@ export class MainComponent implements OnInit {
     this.isLoading = false;
   }
 
-  private searchBooks(searchText: string, page: number) {
+  public searchBooks(searchText: string, page: number) {
     this.isLoading = true;
     this.query = searchText;
     let startIndex = (page - 1) * 10;
     this.bookService.getBooks(encodeURIComponent(searchText), startIndex).subscribe(
       response => {
         this.isLoading = false;
-        console.log(response.items);
         this.books = this.convertResponse(response.items);
         this.currentPage = page;
-        this.maxPage = Math.ceil(response.totalItems / 10);
+        this.maxPage = response.items.length > 10 ? Math.ceil(response.totalItems / 10) : 1;
         this.activePageNumbers = this.getActivePageNumbers(this.maxPage, this.currentPage);
       }
     )
   }
 
-  private convertResponse(booksResponse: any) {
+  public convertResponse(booksResponse: any) {
     let books = [];
     for (let book of booksResponse) {
       let retBook = {
@@ -69,7 +69,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  private getActivePageNumbers(maxPage: number, currentPage:number) {
+  public getActivePageNumbers(maxPage: number, currentPage:number) {
     let ret: number[] = [];
     let minActivePage = this.getMinActivePageNumber(currentPage);
     let i = minActivePage;
@@ -88,7 +88,7 @@ export class MainComponent implements OnInit {
     return minActivePageNumber;
   }
 
-  private switchPage(pageNumber: number) {
+  public switchPage(pageNumber: number) {
     if(this.currentPage != pageNumber) {
       this.searchBooks(this.query, pageNumber);
     }

@@ -6,7 +6,7 @@
         <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText" (keyup.enter)="searchBooks(searchText, 1)">
         <span class="input-group-btn">
           <button type="button" class="btn btn-default" (click)="searchBooks(searchText, 1)"
-              [disabled]="searchText == undifened || searchText.length == 0">
+              [disabled]="searchText == undefined || searchText.length == 0">
             <span class="fa fa-search"></span>
           </button>
         </span>

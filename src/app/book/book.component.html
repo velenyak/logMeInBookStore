@@ -11,8 +11,8 @@
     </div>
     <div class="col-sm-3 text-center">
       <p class="text-center label label-danger price">{{price}}</p>
-      <input type="number" class="form-control top-buffer-sm text-center" [(ngModel)]="orderCount">
-      <button class="btn btn-success btn-lg top-buffer-sm">Add to Cart</button>
+      <input type="number" class="form-control top-buffer-sm text-center" min="1" max="999" [(ngModel)]="orderCount">
+      <button class="btn btn-success btn-lg top-buffer-sm" (click)="addToCart(book, orderCount)">Add to Cart</button>
     </div>
   </div>
 </div>

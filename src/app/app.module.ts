@@ -9,15 +9,18 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { BookComponent } from './book/book.component';
+import { CartComponent } from './cart/cart.component';
 
 import { BookService } from "./shared/book.service";
+import { CartService } from "./shared/cart.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainComponent,
-    BookComponent
+    BookComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,7 @@ import { BookService } from "./shared/book.service";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [BookService],
+  providers: [BookService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

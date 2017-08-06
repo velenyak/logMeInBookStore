@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { BookService } from "../shared/book.service";
+import { CartService } from "../shared/cart.service";
 
 const FOR_SALE: string = 'FOR_SALE';
 
@@ -18,7 +19,7 @@ export class BookComponent implements OnInit {
   orderCount: number;
   authors: string;
 
-  constructor(private route: ActivatedRoute, private bookService: BookService) { }
+  constructor(private route: ActivatedRoute, private bookService: BookService, private cartService: CartService) { }
 
   ngOnInit() {
     this.orderCount = 1;
@@ -31,16 +32,6 @@ export class BookComponent implements OnInit {
     )
   }
 
-  private loadBook(id: string) {
-    this.bookService.getBook(id).subscribe(
-      response => {
-        console.log(response);
-        this.book = response;
-        this.price = this.setPrice(this.book);
-      }
-    )
-  }
-
   private setPrice(book) {
     switch (book.saleInfo.saleability) {
       case FOR_SALE:
@@ -48,6 +39,33 @@ export class BookComponent implements OnInit {
       default:
         return 'Price: FREE';
     }
+  }
+
+  public addToCart(book, orderCount: number) {
+    let cartItem = {
+      'book': book,
+      'count': orderCount
+    };
+
+    let cart: Array<any> = JSON.parse(sessionStorage.getItem('cart'));
+    if(cart == null) {
+      cart = [];
+      cart.push(cartItem);
+    }
+    else {
+      let hasItem = false;
+      for(let i = 0; i < cart.length; i++) {
+        if(cart[i].book.id == cartItem.book.id) {
+          hasItem = true;
+          cart[i].count += cartItem.count;
+        }
+      }
+      if(!hasItem) {
+        cart.push(cartItem);
+      }
+    }
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    this.cartService.newItem(cart);
   }
 
 }
