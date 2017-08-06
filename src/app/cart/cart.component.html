@@ -1,3 +1,31 @@
-<p>
-  cart works!
-</p>
+<div class="container">
+  <h1 class="text-center">Cart</h1>
+  <div class="row top-buffer-md">
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th class="col-sm-1"></th>
+          <th class="col-sm-1 text-center">Quantity</th>
+          <th class="col-sm-5 text-center">Title</th>
+          <th class="col-sm-2 text-center">Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems; let i = index">
+          <td>
+            <span class="fa fa-2x fa-times clickable" (click)="removeItem(i)"></span>
+          </td>
+          <td>
+            <input class="form-control text-center" type="number" min="1" max="999" [(ngModel)]="item.quantity">
+          </td>
+          <td class="cart-item">
+            {{item.book.volumeInfo.title}}
+          </td>
+          <td class="cart-item">
+            {{getTotalPrice(item)}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

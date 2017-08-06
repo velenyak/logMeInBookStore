@@ -5,7 +5,8 @@
         </div>
         <div class="col-xs-3">
             <div class="text-right">
-                <span class="fa fa-2x clickable" [ngClass]="{'fa-shopping-cart': isCartEmpty, 'fa-cart-plus': !isCartEmpty}"></span>
+                <span class="fa fa-2x clickable" [routerLink]="['/cart']"
+                        [ngClass]="{'fa-shopping-cart': isCartEmpty, 'fa-cart-plus': !isCartEmpty}"></span>
             </div>
         </div>
     </div>

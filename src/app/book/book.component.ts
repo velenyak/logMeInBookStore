@@ -16,13 +16,13 @@ export class BookComponent implements OnInit {
   id: string;
   book;
   price: string;
-  orderCount: number;
+  quantity: number;
   authors: string;
 
   constructor(private route: ActivatedRoute, private bookService: BookService, private cartService: CartService) { }
 
   ngOnInit() {
-    this.orderCount = 1;
+    this.quantity = 1;
     this.route.data.subscribe(
       data => {
         this.book = data.book;
@@ -41,10 +41,10 @@ export class BookComponent implements OnInit {
     }
   }
 
-  public addToCart(book, orderCount: number) {
+  public addToCart(book, quantity: number) {
     let cartItem = {
       'book': book,
-      'count': orderCount
+      'quantity': quantity
     };
 
     let cart: Array<any> = JSON.parse(sessionStorage.getItem('cart'));
@@ -57,7 +57,7 @@ export class BookComponent implements OnInit {
       for(let i = 0; i < cart.length; i++) {
         if(cart[i].book.id == cartItem.book.id) {
           hasItem = true;
-          cart[i].count += cartItem.count;
+          cart[i].quantity += cartItem.quantity;
         }
       }
       if(!hasItem) {
@@ -65,7 +65,7 @@ export class BookComponent implements OnInit {
       }
     }
     sessionStorage.setItem('cart', JSON.stringify(cart));
-    this.cartService.newItem(cart);
+    this.cartService.cartItemChange(cart);
   }
 
 }

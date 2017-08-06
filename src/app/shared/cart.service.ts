@@ -7,7 +7,7 @@ export class CartService {
 
   constructor() { }
 
-  newItem(cartItems) {
+  cartItemChange(cartItems) {
     this.cartChange.emit(cartItems);
   }
 
